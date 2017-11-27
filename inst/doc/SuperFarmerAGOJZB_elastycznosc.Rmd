@@ -1,0 +1,63 @@
+---
+title: "SuperFarmerAGOJZB_elastycznosc"
+author: "Alicja Gosiewska, Joanna Zbijewska"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Elastycznosc pakietu SuperFarmerAGOJZB}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+```{r, echo=FALSE}
+library(SuperFarmerAGOJZB)
+```
+
+#Założenia
+
+Wspólnie z innymi grupami przyjęliśmy następujące ustalenia:
+
+- funkcja o nazwie `gra`, symulująca rozgrywkę jednego gracza przyjmuje jeden argument będący funkcją `strategia`,
+
+- `strategia` na wejściu przyjmuje nazwany wektor zawierający stan stada gracza z ustaloną kolejnoscią nazw:
+"krolik","owca" "swinia" "krowa" "kon" "maly_pies" "duzy_pies",
+
+- `strategia` zwraca nazwany wektor zawierający stan stada gracza, z ustaloną kolejnoscią nazw:
+"krolik","owca" "swinia" "krowa" "kon" "maly_pies" "duzy_pies"
+
+W dalszej części przedstawimy uruchomienia funkcji `gra` z naszego pakietu z przykładowymi strategiami z pakietów innych grup oraz uruchomienia funkcji `gra` z pakietów innych grup z naszą strategią.
+
+##Aleksandra Dąbrowska, Hanna Kranas
+
+```{r, message=FALSE, error=TRUE, fig.width=6, fig.height=5}
+library(SuperFarmer.SuperDziewczyn)
+SuperFarmer.SuperDziewczyn::gra(SuperFarmerAGOJZB::strategia_AGOJZB)
+SuperFarmerAGOJZB::gra(SuperFarmer.SuperDziewczyn::strategia_wymian_0_0_0_0)
+SuperFarmerAGOJZB::gra(SuperFarmer.SuperDziewczyn::strategia_wymian_1_1_1_1)
+SuperFarmerAGOJZB::gra(SuperFarmer.SuperDziewczyn::strategia_owce)
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmer.SuperDziewczyn::strategia_owce, ilosc_wywolan = 1000, co_chcesz = "wykres_gestosci")
+```
+
+
+##Anna Dymowska, Piotr Radziński
+
+```{r, message=FALSE, error=TRUE}
+library(SuperFarmer.SuperPakiet)
+SuperFarmerAGOJZB::gra(SuperFarmer.SuperPakiet::strategia_1_na_wiele)
+```
+
+##Agnieszka Ciepielewska, Marek Wawreniuk
+
+```{r, message=FALSE, error=TRUE, fig.width=6, fig.height=5}
+library(SuperFarmerMAPA)
+SuperFarmerAGOJZB::badaj_gre(ilosc_wywolan = 10, strategia1 = SuperFarmerMAPA::strategia_rf, co_chcesz = "histogram")
+SuperFarmerMAPA::gra(SuperFarmerAGOJZB::strategia_AGOJZB)
+```
+
+##Jan Dmitruk, Marianna Dzik
+
+```{r, message=FALSE, error=TRUE, fig.width=6, fig.height=5}
+library(SuperFarmerMoc)
+SuperFarmerAGOJZB::badaj_gre(ilosc_wywolan = 1000, strategia1 = SuperFarmerMoc::strategia_postMDiPR, co_chcesz = "histogram")
+SuperFarmerAGOJZB::badaj_gre(ilosc_wywolan = 1000, strategia2 = SuperFarmerMoc::strategia_Jana, co_chcesz = "wykres_gestosci")
+```
+
+Zaprezentowałyśmy wywołania na wszystich udostępnionych nam strategiach.

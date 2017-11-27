@@ -1,0 +1,139 @@
+---
+title: "Opis_pakietu_SuperFarmerAGOJZB"
+author: "Alicja Gosiewska, Joanna Zbijewska"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Opis dzialania funkcji pakietu SuperFarmerAGOJZB}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+```{r setup, message=FALSE, echo=FALSE}
+library(SuperFarmerAGOJZB)
+```
+#Opis pakietu
+
+Pakiet SuperFarmer AGOJZB pozwala na symulację gry "SuperFarmer" dla jednego gracza. 
+
+Gracz jest hodowcą zwierząt i pragnie zostać superfarmerem. Zwiększa swój zysk rozmnażając zwierzęta. Może zamieniać wyhodowane zwierzęta na inne, jeżeli uzna, że to mu się opłaca. Aby zwyciężyć, musi uzyskać stado złożone, co najmniej z konia, krowy, świni, owcy i królika. Przeszkodą w zdobyciu wszytkich zwierząt są pojawiające się w grze wilki i lisy, które atakują i mogą osłabić stado gracza. Początkowo nasz gracz nie posiada żadnych zwierząt. Aby zdobyć zwierzęta rzuca dwiema dwunastościennymi kośćmi.
+
+Więcej informacji na temat zasad gry można znaleźć w instrukcji dostępnej na [stronie internetowej](http://niewidzeprzeszkodzabrze.pl/wp-content/uploads/2016/02/SUPERFARMER.pdf).
+
+##Parametryzowanie strategii
+
+Nasza strategia jest przystosowana do szybkiej modyfikacji wartości argumentów, co oznacza, że można w niej wybrać ilość królików, owiec, małych psów i dużych psów, które gracz chciałby zawsze (w miarę możliwości) posiadać w swoim stadzie. W funkcji `strategia_AGOJZB` domyślne wartości argumentów dają najkrótsze czasy gry.
+
+##Możliwość modyfikacji zasad
+
+Wszystkie zasady można zmienić.W naszym pakiecie umożliwiamy parametryzację również funkcji `gra()` W tym celu należy podać jej jako argument listę parametryzującą zasady gry. Domyślnie jest to lista zawarta w naszym zbiorze danych o nazwie `param`. Pozwala to na manipulowanie następującymi zasadami gry:
+
+- maksymalną ilością zwierząt dostępnych w grze.
+
+- stanem stada gracza na początku gry,
+
+- warunkiem wygranej,
+
+- wartościami poszczególnych zwierząt,
+
+- ilością poszczególnych gatunków zwierząt na kostkach,
+
+- rodzajem i ilością zwierząt, które zjadają wilk i lis.
+
+Oczywiście, w większości przypadków, zmieniając parametry gry należy zmodyfikować również strategię, gdyż na przykład po zmianie warunków wygranej strategia może nigdy nie doprowadzić do końca gry.
+
+##Sprawdzenie poprawności strategii
+
+Nasza funkcja `gra` ma wbudowaną inną funkcję sprawdzającą, czy podana jako argument strategia dokonuje wymian w poprawny sposób. Poniżej dwa przykłady wywołań. Jedno dla poprawnej oraz drugie dla niepoprawnej wymiany. Istnieje również możliwość wyłączenia sprawdzania przy wywoływaniu gry. W takim przypadku najkrótszą strategią w naszym pakiecie jest `strategia_oszukancza`, która wygrywa w jednym ruchu.
+
+```{r, echo=FALSE}
+library(knitr)
+przykladowe_stado <- c(6, 0, 0, 0, 0, 0, 0)
+names(przykladowe_stado) <- c("krolik","owca","swinia","krowa","kon","maly_pies","duzy_pies")
+
+po_popr_wymianie <- c(0, 1, 0, 0, 0, 0, 0)
+names(po_popr_wymianie) <- c("krolik","owca","swinia","krowa","kon","maly_pies","duzy_pies")
+
+po_niepopr_wymianie <- c(0, 0, 0, 1, 0, 0, 0)
+names(po_niepopr_wymianie) <- c("krolik","owca","swinia","krowa","kon","maly_pies","duzy_pies")
+
+kable(t(przykladowe_stado), caption = "przykladowe_stado")
+kable(t(po_popr_wymianie), caption ="po_popr_wymianie")
+kable(t(po_niepopr_wymianie), caption ="po_niepopr_wymianie")
+```
+
+```{r}
+SuperFarmerAGOJZB::spr_popr_strategii(przykladowe_stado,po_popr_wymianie)
+SuperFarmerAGOJZB::spr_popr_strategii(przykladowe_stado,po_niepopr_wymianie)
+```
+
+Poniżej przykład działania powyższego sprawdzenia w praktyce:
+
+`strategia_AGOJZB` to nasza strategia.
+
+`strategia_oszukancza` to strategia, która bezprawnie dodaje graczowi po jednym zwierzęciu kazdego rodzaju, umożliwiając natychmiastową wygraną.
+
+```{r, error=TRUE}
+SuperFarmerAGOJZB::gra(strategia_AGOJZB)
+SuperFarmerAGOJZB::gra(strategia_oszukancza)
+SuperFarmerAGOJZB::gra(strategia_oszukancza, sprawdzanie=FALSE)
+```
+
+#Jakość strategii
+
+Funkcja `badaj_gre` umożliwia zbadanie jakości strategii. Wywołuje ona grę z wybraną strategią i zwraca podstawowe statystyki, histogram, wykres gęstości lub wykres skrzypcowy dla zadanej ilości wywołań.
+
+```{r, warning=FALSE,fig.width=6, fig.height=2.5}
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz = "statystyki", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=6, fig.height=2.5}
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="histogram", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=6, fig.height=2.5}
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_gestosci", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=4, fig.height=2.5}
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=1000)
+```
+
+
+Funkcja `badaj_gre`ma również funkcję porównania dwóch strategii (domyślnie pierwsza strategia jest podstawową strategią z naszego pakietu, ale można to zmienić), jako strategię drugą wywołujemy `strategiaAGOJZB_kroliki`:
+```{r, warning=FALSE,fig.width=6, fig.height=5}
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki,co_chcesz = "statystyki", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=6, fig.height=5}
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="histogram", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=6, fig.height=5}
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_gestosci", ilosc_wywolan=1000)
+```
+```{r, warning=FALSE,fig.width=6, fig.height=5}
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=1000)
+```
+
+Funkcja `badaj_gre` domyślnie wywołuje funkcję gra dla 10000 wywołań. Gdy chcemy porównać dwie strategie ilość wywołań dochodzi do 20000. W wyniku tego `badaj_gre` może wywoływać się nawet 5 minut. W celu przyspieszenia skompilowałyśmy funkcję `badaj_gre` za pomocą pomocą funkcji `cmpfun` z pakietu `compiler`. Skompilowana funkcja znajduje się w naszym poakiecie pod nazwą `badaj_gre_compiled`.
+Za pomocą profilera porównałyśmy czasy działania funkcji `badaj_gre` oraz `badaj_gre_compiled` dla 1000 powtórzeń. Wyniki prezentują się następująco:
+
+```{r}
+load("partie.rda")
+head(profil$by.total)
+
+load("partie_comp.rda")
+head(profil_compiled$by.total)
+```
+
+Skompilowanie funkcji nie przyspieszyło znacząco jej działania, jednak biorąc pod uwagę, że czas działania funkcji dochodzi do 5 minut, warto rozważyć korzystanie z jej skompilowanej wersji.
+
+#Elastyczność pakietu
+Nasz pakiet jest kompatybilny z pakietami innych grup. Jego elastyczność omawiamy w vignette o nazwie "SuperFarmerAGOJZB_elastycznosc".
+
+#Inżynierska jakość kodu.
+
+##Dokumentacja funkcji
+
+Aby uzyskać więcej informacji po zainstalowaniiu pakietu, wystarczy w konsoli wpisać \code{?nazwa_funkcji}. W naszym pakiecie udokumentowałyśmy wszystkie funkcje oraz zbiory danych.
+
+##Testy
+
+Każda funkcja w pakiecie ma odpowiadające jej testy. Pakiet posiada około 95% pokrycia testami. 
+
+
+
