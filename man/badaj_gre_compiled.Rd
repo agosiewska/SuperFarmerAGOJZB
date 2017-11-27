@@ -36,4 +36,3 @@ Funcja \code{badaj_gre_compiled} jest skompilowaną za pomocą pakietu \code{com
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

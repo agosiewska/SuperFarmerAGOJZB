@@ -21,4 +21,3 @@ Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 
 Joanna Zbijewska, \email{asia.zbijewska@gmail.com}
 }
-

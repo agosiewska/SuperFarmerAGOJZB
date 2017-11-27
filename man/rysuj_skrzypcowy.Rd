@@ -18,4 +18,3 @@ Funcja \code{rysuj_skrzypcowy} tworzy wykres skrzypcowy na podstawie zadanych da
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

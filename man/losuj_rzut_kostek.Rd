@@ -26,4 +26,3 @@ zestawu do gry.
 \author{
 Joanna Zbijewska, \email{asia.zbijewska@gmail.com}
 }
-

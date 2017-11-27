@@ -32,4 +32,3 @@ strategia zaklada wykonanie wymian koniecznych do jak najszybszej wygranej.
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

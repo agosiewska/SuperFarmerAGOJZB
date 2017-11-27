@@ -29,4 +29,3 @@ wilk_co - wektor zawierajacy nazwy zwierzat, ktore zjada wilk podczas ataku
 wilk_ile - wektor zawierajacy wartosci stan liczbowy zwierzat odpowiednich rodzajow, ktore pozostaja
 w stadzie gracza po ataku wilka
 }
-

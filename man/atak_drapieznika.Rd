@@ -40,4 +40,3 @@ Joanna Zbijewska, \email{asia.zbijewska@gmail.com}
 
 Hanna Kranas, \email{unchallenged.yo@gmail.com}
 }
-

@@ -20,4 +20,3 @@ obecnych aktualnie w stadzie gracza zwierzat na kroliki.
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

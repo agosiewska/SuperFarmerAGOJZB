@@ -18,4 +18,3 @@ Funcja \code{rysuj_gestosc} tworzy wykres gestosci na podstawie zadanych danych 
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

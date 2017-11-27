@@ -7,4 +7,3 @@
 \description{
 Zbior zawierajacy domyslne wartosci zwierzat.
 }
-

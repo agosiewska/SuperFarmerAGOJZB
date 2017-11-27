@@ -26,4 +26,3 @@ na wieksze zwierzeta.
 \author{
 Alicja Gosiewska, \email{alicjagosiewska@gmail.com}
 }
-

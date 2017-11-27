@@ -12,4 +12,3 @@ wartosc(zwierze)
 \description{
 Funkcja wartosc() zwraca wartosc wskazanego zwiarzecia.
 }
-

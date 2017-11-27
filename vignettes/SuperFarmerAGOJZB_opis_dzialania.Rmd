@@ -82,31 +82,31 @@ SuperFarmerAGOJZB::gra(strategia_oszukancza, sprawdzanie=FALSE)
 Funkcja `badaj_gre` umożliwia zbadanie jakości strategii. Wywołuje ona grę z wybraną strategią i zwraca podstawowe statystyki, histogram, wykres gęstości lub wykres skrzypcowy dla zadanej ilości wywołań.
 
 ```{r, warning=FALSE,fig.width=6, fig.height=2.5}
-SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz = "statystyki", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz = "statystyki", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=6, fig.height=2.5}
-SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="histogram", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="histogram", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=6, fig.height=2.5}
-SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_gestosci", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_gestosci", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=4, fig.height=2.5}
-SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia1=SuperFarmerAGOJZB::strategia_AGOJZB, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=100)
 ```
 
 
 Funkcja `badaj_gre`ma również funkcję porównania dwóch strategii (domyślnie pierwsza strategia jest podstawową strategią z naszego pakietu, ale można to zmienić), jako strategię drugą wywołujemy `strategiaAGOJZB_kroliki`:
 ```{r, warning=FALSE,fig.width=6, fig.height=5}
-SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki,co_chcesz = "statystyki", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki,co_chcesz = "statystyki", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=6, fig.height=5}
-SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="histogram", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="histogram", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=6, fig.height=5}
-SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_gestosci", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_gestosci", ilosc_wywolan=100)
 ```
 ```{r, warning=FALSE,fig.width=6, fig.height=5}
-SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=1000)
+SuperFarmerAGOJZB::badaj_gre(strategia2=SuperFarmerAGOJZB::strategia_AGOJZB_kroliki, co_chcesz ="wykres_skrzypcowy", ilosc_wywolan=100)
 ```
 
 Funkcja `badaj_gre` domyślnie wywołuje funkcję gra dla 10000 wywołań. Gdy chcemy porównać dwie strategie ilość wywołań dochodzi do 20000. W wyniku tego `badaj_gre` może wywoływać się nawet 5 minut. W celu przyspieszenia skompilowałyśmy funkcję `badaj_gre` za pomocą pomocą funkcji `cmpfun` z pakietu `compiler`. Skompilowana funkcja znajduje się w naszym poakiecie pod nazwą `badaj_gre_compiled`.
